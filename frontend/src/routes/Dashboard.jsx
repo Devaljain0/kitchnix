@@ -1,12 +1,14 @@
-import Appbar from "../components/Appbar";
+import Dashboard from "../components/Dashboard"
 
 
-export function Dashboard(){
+function Dashboarded(){
+
 
     return(
-        <div>
-            <Appbar/>
-            you've made it to Dashboard 
+        <div >  
+            <Dashboard/>
         </div>
     )
 }
+
+export default Dashboarded

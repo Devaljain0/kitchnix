@@ -10,8 +10,8 @@ async function sendVerificationEmail(email, code) {
   let transporter = nodemailer.createTransport({
     service: 'Gmail',
     auth: {
-      user: '',
-      pass: '',
+      user: 'kitchnix.noreply@gmail.com',
+      pass: 'jfcjylnuqwulfutw',
     },
   });
 
@@ -24,6 +24,8 @@ async function sendVerificationEmail(email, code) {
 
   console.log("Verification email sent:", info.messageId);
 }
+
+module.exports = { generateCode, sendVerificationEmail };
 
 
 

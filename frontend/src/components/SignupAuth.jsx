@@ -33,7 +33,7 @@ export const SignupAuth = () => {
               alert('Registration failed. Please try again.');
           }
       } catch (error) {
-          console.error('Error during registration:', error);
+          console.error('Error during registration:',  error.response?.data || error.message);
           alert('An error occurred during registration. Please check your inputs or try again later.');
       }
   };

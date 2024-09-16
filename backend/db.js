@@ -2,7 +2,7 @@ const { Client } = require("pg")
 
  
 const client = new Client({
-  connectionString: "postgresql://postgres:mysecretpassword@localhost:5432/postgres"
+  connectionString: "postgresql://postgres:secretpassword@localhost:5432/postgres"
 })
 
 client.connect()
@@ -33,7 +33,8 @@ const getUsersData = async() => {
   const query = `
     INSERT INTO users (email, username, password, phone_no)
     VALUES ($1, $2, $3, $4)
-    RETURNING *;
+     ON CONFLICT (email) DO NOTHING
+    RETURNING *;;
   `;
 
   const values = ['gautam123@example.com', 'gautam123', 'securepassword', '1234567890'];
