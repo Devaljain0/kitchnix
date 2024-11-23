@@ -9,7 +9,7 @@ router.post('/login', async (req, res) => {
 
   try {
     // Check if the user exists
-    const userQuery = 'SELECT * FROM users WHERE email = $1';
+    const userQuery = 'SELECT * FROM useraccount WHERE user_email = $1';
     const userResult = await client.query(userQuery, [email]);
 
     if (userResult.rows.length === 0) {
@@ -19,19 +19,19 @@ router.post('/login', async (req, res) => {
     const user = userResult.rows[0];
 
     // Directly compare the password (no hashing)
-    if (password !== user.password) {
+    if (password !== user.user_password) {
       return res.status(400).json({ error: 'Invalid email or password' });
     }
 
     // Check if the user is verified
-    if (!user.verified) {
+    if (!user.user_verification_status) {
       return res.status(403).json({ error: 'Account not verified. Please check your email.' });
     }
 
     // Generate a JWT token
     const token = jwt.sign(
-      { email: user.email },
-      "myjwtsecret",
+      { email: user.user_email },
+      process.env.JWT_SECRET,
       { expiresIn: '1h' }
     );
 
